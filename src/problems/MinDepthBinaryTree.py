@@ -1,6 +1,5 @@
+from typing import Optional
 from collections import deque
-from typing import Optional, List
-import statistics
 
 
 # Definition for a binary tree node.
@@ -11,21 +10,22 @@ class TreeNode:
         self.right = right
 
 
-def averageOfLevels(root: Optional[TreeNode]) -> List[float]:
+def minDepth(root: Optional[TreeNode]) -> int:
     if root is None:
-        return None
+        return 0
 
+    depth: int = 0
     queue = deque()
     queue.append(root)
-    result = list()
+
     while queue:
-        current_level = []
+        depth += 1
         for _ in range(len(queue)):
             current_node = queue.popleft()
-            current_level.append(current_node.val)
             if current_node.left:
                 queue.append(current_node.left)
             if current_node.right:
                 queue.append(current_node.right)
-        result.append(statistics.mean(current_level))
-    return result
+
+            if current_node.left is None and current_node.right is None:
+                return depth
