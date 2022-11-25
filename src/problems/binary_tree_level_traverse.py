@@ -8,15 +8,16 @@ class TreeNode:
 
 
 def traverse(root):
-    result = []
     if root is None:
-        return result
+        return None
+    result = []
 
     queue = deque()
     queue.append(root)
     while queue:
         level_size = len(queue)
         current_level = []
+
         for _ in range(level_size):
             current_node = queue.popleft()
             current_level.append(current_node.val)
@@ -28,18 +29,17 @@ def traverse(root):
 
     return result
 
-
-def reverse_traversal(root):
-    result = deque()
-
+def traverse_reverse(root):
     if root is None:
-        return result
+        return None
+    result = deque()
 
     queue = deque()
     queue.append(root)
     while queue:
         level_size = len(queue)
         current_level = []
+
         for _ in range(level_size):
             current_node = queue.popleft()
             current_level.append(current_node.val)
@@ -49,7 +49,7 @@ def reverse_traversal(root):
                 queue.append(current_node.right)
         result.appendleft(current_level)
 
-    return result
+    return list(result)
 
 
 def main():
@@ -59,7 +59,8 @@ def main():
     root.left.left = TreeNode(9)
     root.right.left = TreeNode(10)
     root.right.right = TreeNode(5)
-    print("Level order traversal: " + str(reverse_traversal(root)))
+    print("Level order traversal: " + str(traverse(root)))
+    print("Reverse level order traversal: " + str(traverse_reverse(root)))
 
 
 main()

@@ -3,6 +3,7 @@ from typing import List
 
 
 def lastStoneWeight(stones: List[int]) -> int:
+    # we use negative numbers because heapq is min heap
     heap = [-stone for stone in stones]
     heapq.heapify(heap)
 
@@ -14,7 +15,6 @@ def lastStoneWeight(stones: List[int]) -> int:
             continue
         else:
             heapq.heappush(heap, -(first - second))
-
     if len(heap) == 0:
         return 0
     else:
